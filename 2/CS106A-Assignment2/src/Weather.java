@@ -3,6 +3,9 @@
 import acm.program.*;
 
 public class Weather extends ConsoleProgram {
+	
+	private static final int SENTINEL_VALUE = -42;
+
 	public void run() {
 		// TODO: finish this program
 		println("CS 106A \"Weather Master 4000\"!");
@@ -10,21 +13,19 @@ public class Weather extends ConsoleProgram {
 	}
 	
 	private void getWeather() {
-		
-		int highestTemp = 0;
-		int lowestTemp = 0;
+				
+		int temp = readInt("Next temperature (or " + SENTINEL_VALUE + " to quit): ");
+		int highestTemp = temp;
+		int lowestTemp = temp;
 		
 		int sum = 0;
 		int count = 0;
 		int coldDays = 0;
 
-		while (true) {
+		while (temp != SENTINEL_VALUE) {
 			
-			int temp = readInt("Next temperature (or -1 to quit): ");
-			
-			if (temp == -1) {
-				break;
-			}
+			sum += temp;
+			count ++;
 			
 			if (temp >= highestTemp) {
 				highestTemp = temp;
@@ -38,16 +39,23 @@ public class Weather extends ConsoleProgram {
 				coldDays ++;
 			}
 			
-			sum += temp;
-			count ++;
+			temp = readInt("Next temperature (or " + SENTINEL_VALUE + " to quit): ");
+
 		}
 		
-		double average = average(sum, count);
+		if (count == 0) {
+			
+			println("No temperature were entered.");
+			
+		} else {
+			
+			double average = average(sum, count);	
+			println("Highest temperature = " + highestTemp);
+			println("Lowest temperature = " + lowestTemp);
+			println("Average = " + average);
+			println(coldDays + " cold day(s).");
+		}
 		
-		println("Highest temperature = " + highestTemp);
-		println("Lowest temperature = " + lowestTemp);
-		println("Average = " + average);
-		println(coldDays + " cold day(s).");
 		
 	}
 	
