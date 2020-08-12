@@ -33,7 +33,7 @@ public class Hailstone extends ConsoleProgram {
 		steps++;
 		}
 		println("It took " + steps + " steps to reach 1.");
-		if (readBoolean("Run again? ", "y", "n")) {
+		if (readBoolean("Run again?(y/n) ", "y", "n")) {
 			int num = readInt("Enter a number: ");	
 			computeHailstone(num);
 		}
